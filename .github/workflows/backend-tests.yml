@@ -1,6 +1,6 @@
 # https://stackoverflow.com/a/70711156/1534675
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Backend Tests
+run-name: ${{ github.actor }} is running Backend Tests 🚀
 on:
   push:
     paths:

@@ -1,0 +1,56 @@
+# https://stackoverflow.com/a/70711156/1534675
+name: Frontend Tests
+run-name: ${{ github.actor }} is running Frontend Tests 🚀
+on:
+  push:
+    paths:
+      - "react-web-client/**"
+      - "docker-compose.yml"
+      - "docker-compose.test.frontend.yml"
+      - "run-frontend-tests.sh"
+env:
+  ACTIONS_RUNNER_DEBUG: true
+jobs:
+  # paths-filter:
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     output1: ${{ steps.filter.outputs.workflows }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+  #     - uses: dorny/paths-filter@v2
+  #       id: filter
+  #       with:
+  #         filters: |
+  #           backend:
+  #             - 'nodejs-api/**'
+  #             - 'docker-compose.yml'
+  #             - 'docker-compose.test.backend.yml'
+  #             - 'run-backend-tests.sh'
+  #     # run only if 'backend' files were changed
+  #     - name: backend tests
+  #       if: steps.filter.outputs.backend == 'true'
+  #       run: echo "Backend tests"
+  #     # run only if not 'backend' files were changed
+  #     - name: not backend tests
+  #       if: steps.filter.outputs.backend != 'true'
+  #       run: echo "NOT Backend tests"
+  run-backend-tests:
+    runs-on: ubuntu-latest
+    # needs: paths-filter
+    # if: needs.paths-filter.outputs.backend == 'true'
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo `ls | xargs`
+      - run: ./run-frontend-tests.sh
+        shell: bash
+      - run: echo "🍏 This job's status is ${{ job.status }}."

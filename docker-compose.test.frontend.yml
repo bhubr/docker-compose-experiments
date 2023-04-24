@@ -1,0 +1,5 @@
+version: "3.9" # optional since v1.27.0
+services:
+  web-frontend:
+    container_name: todo_frontend_test
+    command: yarn jest
