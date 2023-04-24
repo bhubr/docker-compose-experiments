@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate-and-start": "ls && npx db-migrate up -e dev && node src/index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql2": "^3.2.3"
+  },
+  "devDependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-mysql": "^2.2.0",
+    "eslint": "^8.39.0"
+  }
+}

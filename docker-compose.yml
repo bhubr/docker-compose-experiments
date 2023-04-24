@@ -1,0 +1,20 @@
+version: "3.9" # optional since v1.27.0
+services:
+  backend:
+    build: ./nodejs-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=nodejs_api
+      - DB_USER=nodejs
+      - DB_PASS=nodejs
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=R00t.P4ss
+      - MYSQL_DATABASE=nodejs_api
+      - MYSQL_USER=nodejs
+      - MYSQL_PASSWORD=nodejs
