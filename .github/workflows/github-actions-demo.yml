@@ -50,6 +50,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: ls
+      - run: echo `ls | xargs`
       - run: ./run-backend-tests.sh
+        shell: bash
       - run: echo "🍏 This job's status is ${{ job.status }}."
