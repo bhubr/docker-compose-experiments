@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+import ErrorAlert from "./ErrorAlert";
+import TasksList from "./TasksList";
+import AddTask from "./AddTask";
+import { getAllTasks } from "./api";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [tasks, setTasks] = useState(null);
+
+  const onAddTask = (task) => setTasks((prev) => [...prev, task]);
+
+  useEffect(() => {
+    getAllTasks()
+      .then(setTasks)
+      .catch(setError)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <p>loading</p>;
+  }
+  if (error !== null) {
+    return <ErrorAlert error={error} />;
+  }
 
   return (
     <>
+      <h1>Todo App</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <TasksList tasks={tasks} />
+        <AddTask onSuccess={onAddTask} onError={setError} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
