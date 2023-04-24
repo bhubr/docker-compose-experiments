@@ -1,4 +1,4 @@
-const queryAsync = require("../db-query");
+const { queryAsync } = require("../db-query");
 
 const getAllTasks = async (req, res) => {
   try {
@@ -20,7 +20,6 @@ const postTask = async (req, res) => {
   }
   try {
     const { insertId } = await queryAsync("INSERT INTO task SET ?", { title });
-    console.log(">> new task with id", insertId);
     const [task] = await queryAsync(
       "SELECT * FROM task WHERE id = ?",
       insertId

@@ -13,4 +13,4 @@ const pool = mysql.createPool({
 
 const queryAsync = promisify(pool.query.bind(pool));
 
-module.exports = queryAsync;
+module.exports = { pool, queryAsync };
