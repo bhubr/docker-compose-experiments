@@ -23,7 +23,7 @@ const postTask = async (req, res) => {
     console.log(">> new task with id", insertId);
     const [task] = await queryAsync(
       "SELECT * FROM task WHERE id = ?",
-      res.insertId
+      insertId
     );
     return res.send(task);
   } catch (err) {
