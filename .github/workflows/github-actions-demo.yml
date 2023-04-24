@@ -2,13 +2,15 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+env:
+  ACTIONS_RUNNER_DEBUG: true
 jobs:
   paths-filter:
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.filter.outputs.workflows }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - uses: dorny/paths-filter@v2
         id: filter
@@ -19,12 +21,12 @@ jobs:
               - 'docker-compose.yml'
               - 'docker-compose.test.backend.yml'
               - 'run-backend-tests.sh'
-      # run only if 'workflows' files were changed
+      # run only if 'backend' files were changed
       - name: backend tests
         if: steps.filter.outputs.backend == 'true'
         run: echo "Backend tests"
-      # run only if not 'workflows' files were changed
-      - name: not workflow tests
+      # run only if not 'backend' files were changed
+      - name: not backend tests
         if: steps.filter.outputs.backend != 'true'
         run: echo "NOT Backend tests"
   Explore-GitHub-Actions:
