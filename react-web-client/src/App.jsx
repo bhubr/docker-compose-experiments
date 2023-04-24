@@ -22,15 +22,13 @@ function App() {
   if (loading) {
     return <p>loading</p>;
   }
-  if (error !== null) {
-    return <ErrorAlert error={error} />;
-  }
 
   return (
     <>
       <h1>Todo App</h1>
+      {error && <ErrorAlert error={error} />}
       <div>
-        <TasksList tasks={tasks} />
+        {tasks !== null && <TasksList tasks={tasks} />}
         <AddTask onSuccess={onAddTask} onError={setError} />
       </div>
     </>
