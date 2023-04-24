@@ -1,6 +1,7 @@
 version: "3.9" # optional since v1.27.0
 services:
   backend:
+    container_name: todo_backend
     build: ./nodejs-api
     ports:
       - "8000:8000"
@@ -9,13 +10,16 @@ services:
       - DB_NAME=nodejs_api
       - DB_USER=nodejs
       - DB_PASS=nodejs
+      - WAIT_HOSTS=mysql:3306
     depends_on:
       - mysql
   web-frontend:
+    container_name: todo_frontend
     build: ./react-web-client
     ports:
       - "3000:5173"
   mysql:
+    container_name: todo_db
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=R00t.P4ss

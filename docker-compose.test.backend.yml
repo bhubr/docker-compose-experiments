@@ -1,0 +1,12 @@
+version: "3.9" # optional since v1.27.0
+services:
+  backend:
+    container_name: todo_backend_test
+    environment:
+      - DB_NAME=nodejs_api_test
+    command: sh -c "/opt/wait && yarn db-migrate up -e dev && yarn test"
+
+  mysql:
+    container_name: todo_db_test
+    environment:
+      - MYSQL_DATABASE=nodejs_api_test
