@@ -4,7 +4,11 @@ export default function TasksList({ tasks }) {
   return (
     <div>
       {tasks.map((task) => (
-        <div key={task.id} style={{ display: "flex" }}>
+        <div
+          data-testid={`task-${task.id}`}
+          key={task.id}
+          style={{ display: "flex" }}
+        >
           <span>{task.title}</span>
         </div>
       ))}
