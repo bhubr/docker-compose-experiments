@@ -10,6 +10,7 @@ export default function AddTask({ onError, onSuccess }) {
     try {
       const newTask = await postTask({ title });
       onSuccess(newTask);
+      setTitle("");
     } catch (err) {
       onError(err);
     }
