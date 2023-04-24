@@ -11,6 +11,10 @@ services:
       - DB_PASS=nodejs
     depends_on:
       - mysql
+  web-frontend:
+    build: ./react-web-client
+    ports:
+      - "3000:5173"
   mysql:
     image: mysql:5.7
     environment:
